@@ -34,7 +34,7 @@ function App() {
       <Navbar />
       <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
       <ProductsList>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
             images={product.images}
