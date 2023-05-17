@@ -1,5 +1,6 @@
 import '../products/products.css'
 
+
 function ProductCard({images, title, price}) {
     return (
       <>
@@ -8,7 +9,8 @@ function ProductCard({images, title, price}) {
           <img src={images[0]} alt={title} />
         </figure>
         <p>{title}</p>
-        <p>{price}</p>
+        <p>$ {price}</p>
+       <button>Añadir al carrito</button>
         </div>
       </>
      
