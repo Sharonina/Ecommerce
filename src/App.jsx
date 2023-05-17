@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+import { SearchBar } from "./SearchBar/SearchBar";
+
 function App() {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
@@ -12,10 +16,21 @@ function App() {
       });
   }, []);
 
+  const handleSearch = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = products.filter((product) =>
+      product.title.toLowerCase().includes(term)
+    );
+    setFilteredProducts(filtered);
+  };
+
   return (
     <>
+      <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
       <div>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <>
             <figure>
               <img src={product.images[0]} />
