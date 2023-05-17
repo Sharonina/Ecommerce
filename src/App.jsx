@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+import Navbar from './Layout/Layout.jsx';
 import { SearchBar } from "./SearchBar/SearchBar";
 import { ProductsList } from "./ProductsList/ProductsList";
 
@@ -27,8 +28,14 @@ function App() {
     setFilteredProducts(filtered);
   };
 
+// export default App
+import React from 'react';
+
+
+function App() {
   return (
     <>
+      <Navbar />
       <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
       <ProductsList>
         {filteredProducts.map((product) => (
@@ -46,3 +53,4 @@ function App() {
 }
 
 export default App;
+
