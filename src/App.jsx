@@ -1,22 +1,45 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import ProductCard from './products/ProductCard';
+import { useEffect, useState } from "react";
+import "./App.css";
 
-  
-  function App() {
-    const [products, setProducts] = useState([]);
-  
-    useEffect(() => {
-      fetch("https://dummyjson.com/products?limit=100")
-        .then((res) => res.json())
-        .then((data) => {
-          setProducts(data.products);
-        });
-    }, []);
-  
-    return (
-      <div>
-      {products.map((product) => (
+import ProductCard from './products/ProductCard';
+import Navbar from './Layout/Layout.jsx';
+import { SearchBar } from "./SearchBar/SearchBar";
+import { ProductsList } from "./ProductsList/ProductsList";
+
+function App() {
+  const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/products?limit=100")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.products);
+      });
+  }, []);
+
+  const handleSearch = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = products.filter((product) =>
+      product.title.toLowerCase().includes(term)
+    );
+    setFilteredProducts(filtered);
+  };
+
+// export default App
+import React from 'react';
+
+
+function App() {
+  return (
+    <>
+      <Navbar />
+      <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
+      <ProductsList>
+        {products.map((product) => (
         <ProductCard
           key={product.id}
           images={product.images}
@@ -24,10 +47,10 @@ import ProductCard from './products/ProductCard';
           price={product.price}
         />
       ))}
-    </div>
+      </ProductsList>
+    </>
   );
-  }
+}
 
+export default App;
 
-
-export default App
