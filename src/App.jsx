@@ -16,6 +16,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);
+        setFilteredProducts(data.products);
       });
   }, []);
 
@@ -23,9 +24,13 @@ function App() {
     const term = event.target.value.toLowerCase();
     setSearchTerm(term);
 
-    const filtered = products.filter((product) =>
-      product.title.toLowerCase().includes(term)
-    );
+    const filtered =
+      term === ""
+        ? products
+        : products.filter((product) =>
+            product.title.toLowerCase().includes(term)
+          );
+
     setFilteredProducts(filtered);
   };
 
