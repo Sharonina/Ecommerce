@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 import { SearchBar } from "./SearchBar/SearchBar";
+import { ProductsList } from "./ProductsList/ProductsList";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -29,7 +30,7 @@ function App() {
   return (
     <>
       <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
-      <div>
+      <ProductsList>
         {filteredProducts.map((product) => (
           <>
             <figure>
@@ -39,7 +40,7 @@ function App() {
             <p>{product.price}</p>
           </>
         ))}
-      </div>
+      </ProductsList>
     </>
   );
 }
