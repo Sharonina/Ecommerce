@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+import ProductCard from './products/ProductCard';
 import Navbar from './Layout/Layout.jsx';
 import { SearchBar } from "./SearchBar/SearchBar";
 import { ProductsList } from "./ProductsList/ProductsList";
@@ -38,15 +39,14 @@ function App() {
       <Navbar />
       <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
       <ProductsList>
-        {filteredProducts.map((product) => (
-          <>
-            <figure>
-              <img src={product.images[0]} />
-            </figure>
-            <p>{product.title}</p>
-            <p>{product.price}</p>
-          </>
-        ))}
+        {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          images={product.images}
+          title={product.title}
+          price={product.price}
+        />
+      ))}
       </ProductsList>
     </>
   );
