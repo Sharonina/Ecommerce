@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-import ProductCard from './products/ProductCard';
-import Navbar from './Layout/Layout.jsx';
+import ProductCard from "./products/ProductCard";
+import Navbar from "./Layout/Layout.jsx";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { ProductsList } from "./ProductsList/ProductsList";
 
@@ -29,28 +29,22 @@ function App() {
     setFilteredProducts(filtered);
   };
 
-// export default App
-import React from 'react';
-
-
-function App() {
   return (
     <>
       <Navbar />
       <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
       <ProductsList>
         {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          images={product.images}
-          title={product.title}
-          price={product.price}
-        />
-      ))}
+          <ProductCard
+            key={product.id}
+            images={product.images}
+            title={product.title}
+            price={product.price}
+          />
+        ))}
       </ProductsList>
     </>
   );
 }
 
 export default App;
-
